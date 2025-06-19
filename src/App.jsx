@@ -3,6 +3,7 @@ import Hero from './Hero'
 import './App.css'
 import InterviewPage from './InterviewPage'
 import SetupInterview from './setupInterviewPage'
+import Login from './logIn'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
         <Route path="/" element={<Hero />} />
         <Route path="/InterviewPage" element={<InterviewPage />} />
         <Route path="/setupInterviewPage" element={<SetupInterview />} />
+        <Route path="/logIn" element={<Login />} />
+
       </Routes>
     </Router>
   )
