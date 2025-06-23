@@ -84,7 +84,7 @@ export default function Hero() {
             <a href='logIn' className="mt-2 mr-4 text-sm/6 font-sans text-gray-900">
               Log in 
             </a>
-      <a href='signUp' className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-sans text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+      <a href='signupPage' className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-sans text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
         Sign Up 
       </a>
       </div>
@@ -125,10 +125,10 @@ export default function Hero() {
         </div>
         <div className="py-6">
           <a
-          href="#home"
+          href="#login"
           className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-sans text-gray-900 hover:bg-gray-50"
           >
-          Log in
+          Loggg in
           </a>
         </div>
         </div>

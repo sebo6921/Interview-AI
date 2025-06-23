@@ -68,7 +68,7 @@ class InterviewRequest(BaseModel):
 
 
 
-@router.post("/api/start-interview")
+@router.post("/start-interview")
 async def start_interview(payload: InterviewRequest):
     name = payload.name.strip()
     company = payload.company.strip()

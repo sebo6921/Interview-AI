@@ -119,7 +119,6 @@ const SetupInterview = () => {
                 }
             });
         } catch (error) {
-            console.error("Error starting interview:", error);
             setError('Failed to start interview. Please try again.');
         }
     };

@@ -69,7 +69,7 @@ class InterviewRequest(BaseModel):
     name: str
     company: str
     
-@router.post("/api/generate-answer")
+@router.post("/generate-answer")
 async def generate_answer(request: Request):
     body = await request.json()
     print(f"Received body: {body}")

@@ -26,33 +26,56 @@ import { useNavigate } from 'react-router-dom';
                 setShowPasswordInput(true); // Show password field
               }
               
-        
+        function validatePassword(password) {
+            // Add your password validation logic here
+            const length = password.length>=8;
+            const Uppercase = /[A-Z]/.test(password);
+            const Lowercase = /[a-z]/.test(password);
+            const Number = /[0-9]/.test(password);
+            const SpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            switch (true) {
+                case !length:
+                  setError('Password must be at least 8 characters long.');
+                  return false;
+                case !Uppercase:
+                  setError('Password must contain at least one uppercase letter.');
+                  return false;
+                case !Lowercase:
+                  setError('Password must contain at least one lowercase letter.');
+                  return false;
+                case !Number:
+                  setError('Password must contain at least one number.');
+                  return false;
+                case !SpecialCharacter:
+                  setError('Password must contain at least one special character.');
+                  return false;
+                default:
+                  setError(''); // Clear any previous errors
+                  return true;
+              }
+        }
         async function handleSubmit(e) {
             e.preventDefault();
-            if (!email || !password) {
-                setError('Please enter both email and password.');
-                return;
-            }
-            try {
-                const response = await axios.post('http://localhost:8000/api/check-credentials', {
-                    email: email,
-                    password: password,
-                },
-              {
-                withCredentials: true
-              }
-            );
-        
-                if (response.data.exists) {
-                    setError('');
-                    navigate('/cvExtraction'); // Redirect to the dashboard or another page
-                } else {
-                    setError(response.data.message || 'Invalid email or password.');
+            if (validatePassword(password)) {
+                try {
+                    const response = await axios.post("http://localhost:8000/api/signup", {
+                        withCredentials: true,
+                        email: email,
+                        password: password
+                    },{
+                    headers: {
+                        "Content-Type": "application/json"
+                }});
+                   
+                navigate("/login");
+                } catch (error) {
+                  if (error.response?.status === 400) {
+                    setError("This email is already registered. Try logging in instead.");
+                  } else {
+                    setError("Something went wrong. Please try again.");
+                  }
                 }
-            } catch (error) {
-                setError('Something went wrong. Please try again.');
             }
-                
         }
     
           
@@ -79,7 +102,7 @@ import { useNavigate } from 'react-router-dom';
       alt="Interview AI Logo"
       className="mb-2 h-20 w-20 rounded-full"
     />
-    <h1 className="text-2xl font-sans mb-4">Log In</h1>
+    <h1 className="text-2xl font-sans mb-4">Create an account</h1>
     <form onSubmit={showPasswordInput ? handleSubmit : handleEmailContinue} className="flex flex-col items-center gap-4 w-64">
   <input
     type="email"
@@ -123,12 +146,14 @@ import { useNavigate } from 'react-router-dom';
         type="submit"
         className="w-full bg-indigo-600 text-white font-sans py-2 rounded-md hover:bg-indigo-500"
       >
-        Start Practising
+        Sign Up
       </button>
     </motion.div>
   )}
 </AnimatePresence>
-  
+  <span className="flex-items  px-1 text-gray-500">Already have an account?     <a href="/login" className="text-indigo-600 hover:underline">
+      Log In
+    </a></span>
 
         <div className="flex items-center justify-center w-full my-1">
       <div className="h-px w-full bg-gray-300"></div>
